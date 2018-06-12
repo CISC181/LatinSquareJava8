@@ -27,22 +27,15 @@ public class ArrayTester {
 
 	private static int[] getColumn(int[][] arr2D, int c) {
 		return IntStream.range(0, arr2D.length).map(i -> arr2D[i][c]).toArray();
-	}
+	} 
 
 	public static boolean isLatin(int[][] square) {
 
-		for (int[] item : square) {
-			if (containsDuplcates(item)) {
-				return false;
-			}
-		}
+		if (containsDuplcates(square[0]))
+			return false;
+		
 		for (int a = 0; a < square.length - 1; a++) {
-			if (!hasAllValues(square[0], square[a + 1]))
-				return false;
-
-			int[] col = getColumn(square, a + 1);
-
-			if (!hasAllValues(square[0], col))
+			if (!hasAllValues(square[0], square[a + 1]) || (!hasAllValues(square[0], getColumn(square, a + 1))))
 				return false;
 		}
 		return true;
